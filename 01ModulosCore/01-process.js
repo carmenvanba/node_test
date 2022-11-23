@@ -14,4 +14,4 @@ function singleThread()
     console.log('Argumentos del proceso.... ' + process.argv)
     console.log('---------------------------------------------')
 }
-singleThread()
+singleThread();
