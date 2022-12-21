@@ -19,6 +19,8 @@ var http = require('http').createServer(webServer),
                 .on('data', function (data){ //Mientras haya datos, ejecutaremos la siguiente Callback
                     dataString += data //Que concatenará el dato en la variable dataString
                 })
+
+                /*
                 .on('end', function (){ //Cuando terminen los datos, ejecutarermos la siguiente Callback
                     //Declaramos una variable de texto
                     //Texto concatenado con el valor de la variable ${dataString}
@@ -26,7 +28,24 @@ var http = require('http').createServer(webServer),
                     console.log(templateString) //Lo mostramos en el terminal
                     res.end(templateString) //Es lo que enviará al navegador web
                 })
+                */
+
+                .on('data', function (data){ //Mientras haya datos, ejecutaremos la siguiente Callback
+                    dataString += data //Que concatenará el dato en la variable dataString
+                })
+                    .on('end', function (){ //Cuando terminen los datos, ejecutarermos la siguiente Callback
+                        var dataObject = querystring.parse(dataString), //Obtendremos un objeto con querystring.parse
+                            dataJSON = util.inspect(dataObject), //inspect devuelve una cadena de texto de un objeto
+                            //Declaramos una variable de texto
+                            templateString = `
+                            Los datos que enviaste por POST como string son: ${dataString}
+                            Los datos que enviaste por POST como JSON son: ${dataJSON}
+                            `
+                            console.log(templateString)
+                            res.end(templateString) //Es lo que enviará al navegador web
+                    })
         }
+    
    }
   
 http.listen(3005)
