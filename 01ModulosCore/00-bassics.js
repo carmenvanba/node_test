@@ -10,3 +10,4 @@ setInterval(function (){
 }, 1000)
 //Ctrl + C detengo la ejecución de un script en la consola
 
+//dasdasdasdas
