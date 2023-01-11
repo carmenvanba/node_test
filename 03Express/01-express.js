@@ -10,7 +10,12 @@ app.set('view engine', 'ejs');
 //Middleware
 app.use(express.static(__dirname+'/public'));
 
-//Peticiones básicas HTTP
+//Llamadas a las rutas
+app.use('/',require('./router/rutas'));
+app.use('/pokemon',require('./router/pokemon'));
+
+//Peticiones básicas HTTP sin llamadas a las rutas
+/*
 app.get('/', (req, res) => {
     res.render("index", {titulo : "mi titulo dinamico"})
   })
@@ -18,7 +23,7 @@ app.get('/', (req, res) => {
 app.get('/contacto', (req, res) => {
     res.render("contacto", {tituloContacto : "estamos en contacto de manera dinamica"})
 })
-
+*/
 app.use((req,res) => {
     res.status(404).render("404", {
         titulo: "Error 404",
